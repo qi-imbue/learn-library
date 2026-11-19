@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 // Per-slide archived flag, held at the app level so the sidebar tree and the
 // header toggle share one source of truth. Archived slides are relocated under
@@ -29,6 +29,22 @@ export function useArchived(topics) {
     }
     return init
   })
+
+  // The flag saved on the server, read once, as useTags reads tags: a build
+  // only knows the flag its content had. A flag set in this browser still wins.
+  useEffect(() => {
+    for (const dir of Object.keys(topics)) {
+      if (loadLocal(dir) != null) continue
+      fetch(`./__archived?topic=${encodeURIComponent(dir)}`)
+        .then((res) => (res.ok ? res.json() : null))
+        .then((body) => {
+          if (typeof body?.archived === 'boolean') {
+            setArchivedByTopic((prev) => ({ ...prev, [dir]: body.archived }))
+          }
+        })
+        .catch(() => {})
+    }
+  }, [topics])
 
   const setTopicArchived = useCallback((dir, nextRaw) => {
     const next = !!nextRaw

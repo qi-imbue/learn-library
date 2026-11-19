@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { normalizeTags } from './tags.js'
 
 // Per-topic tag store, held at the app level so the sidebar filter and the
@@ -28,6 +28,24 @@ export function useTags(topics) {
     }
     return init
   })
+
+  // The tags saved on the server, read once: a build only knows the tags its
+  // content had, and a deployed app saves them after it is built. A tag set in
+  // this browser still wins. A server without the endpoint answers with
+  // something else, which is ignored.
+  useEffect(() => {
+    for (const dir of Object.keys(topics)) {
+      if (loadLocal(dir) != null) continue
+      fetch(`./__tags?topic=${encodeURIComponent(dir)}`)
+        .then((res) => (res.ok ? res.json() : null))
+        .then((body) => {
+          if (Array.isArray(body?.tags)) {
+            setTagsByTopic((prev) => ({ ...prev, [dir]: normalizeTags(body.tags) }))
+          }
+        })
+        .catch(() => {})
+    }
+  }, [topics])
 
   const setTopicTags = useCallback((dir, nextRaw) => {
     const next = normalizeTags(nextRaw)

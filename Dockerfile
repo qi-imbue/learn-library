@@ -3,6 +3,9 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
+# Build once, here, where the build's memory allowance applies; the running app
+# only serves. Saved tags, archive flags and annotations are read at runtime.
+RUN npx vite build
 # The topics the repo publishes. At start they are laid out under the app's
 # persistent data directory, and content/ becomes a link to it.
 RUN mv content published

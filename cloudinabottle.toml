@@ -13,8 +13,10 @@ port = 8080
 public_paths = ["/"]
 
 [resources]
-memory_mb = 512
-build_memory_mb = 1024
+# Serving takes about 75 MB; building the page (Vite bundling React, KaTeX and
+# every topic into one file) needs over 512 MB, and happens in the image build.
+memory_mb = 256
+build_memory_mb = 1536
 cpu_cores = 0.5
 
 [data]

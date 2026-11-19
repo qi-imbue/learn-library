@@ -1,9 +1,10 @@
 // Start the library on Cloud in a Bottle: lay the published topics out under
 // the app's persistent data directory, keeping what was saved there (each
 // topic's annotations, tags and archived flag), point content/ at it, then
-// build the app and serve it on port 8080.
+// serve the app the image built on port 8080. The page reads what was saved
+// through the app's endpoints, so nothing is rebuilt here.
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, symlinkSync, writeFileSync } from 'node:fs'
-import { spawn, spawnSync } from 'node:child_process'
+import { spawn } from 'node:child_process'
 import path from 'node:path'
 
 const app = process.cwd()
@@ -65,8 +66,6 @@ console.log(`serving ${wanted.length} topic(s) from ${content}`)
 const zone = process.env.BOTTLE_ZONE_DOMAIN
 process.env.LFS_ALLOWED_HOSTS ??= zone ? `.${zone}` : 'all'
 
-const build = spawnSync('npx', ['vite', 'build'], { stdio: 'inherit' })
-if (build.status !== 0) process.exit(build.status ?? 1)
 const server = spawn('npx', ['vite', 'preview', '--host', '0.0.0.0', '--port', '8080', '--strictPort'], { stdio: 'inherit' })
 for (const sig of ['SIGTERM', 'SIGINT']) process.on(sig, () => server.kill(sig))
 server.on('exit', (code) => process.exit(code ?? 0))

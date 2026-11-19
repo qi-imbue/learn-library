@@ -19,18 +19,20 @@ and rebuilds. Several topics can be named at once. To unpublish one,
 
 ## How the app runs
 
-- `Dockerfile` installs the app and moves `content/` to `published/`.
+- `Dockerfile` installs and builds the app, then moves `content/` to
+  `published/`. The build needs over 512 MB, so it runs in the image build;
+  serving takes about 75 MB.
 - `bottle-start.mjs` copies each published topic into
   `$BOTTLE_APP_DATA_DIR/content/`, keeping what was saved there: a topic's
   `annotations.json`, and the `tags` and `archived` keys of its
   `manifest.json`. A topic no longer published moves to
   `$BOTTLE_APP_DATA_DIR/unpublished/`. `content/` becomes a link to that
-  directory, and the app is built and served by `vite preview` on port 8080,
+  directory, and the built app is served by `vite preview` on port 8080,
   answering for every subdomain of `$BOTTLE_ZONE_DOMAIN` (`LFS_ALLOWED_HOSTS`).
 - The pages are public (`public_paths = ["/"]` in `cloudinabottle.toml`).
   Saving annotations, tags and archive flags requires the owner: the app
   refuses a write without `X-OpenHost-Is-Owner: true`, which the router sets
   on the owner's requests (`LFS_WRITE_REQUIRES_HEADER` in the `Dockerfile`).
   A visitor's edits stay in their own browser.
-- Tags and archive flags you save are read at build time, so other visitors
-  see them after the next reload of the app; annotations show at once.
+- The page reads saved annotations, tags and archive flags from the app's
+  endpoints when it loads, so what you save shows to every visitor at once.
