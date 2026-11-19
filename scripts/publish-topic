@@ -1,0 +1,45 @@
+#!/bin/sh
+# publish-topic <topic>…: publish learn-from-scratch topics to the library.
+#
+# A topic is its folder under the app's content/, given either way:
+#   publish-topic content/datalib/dag-config-by-hand
+#   publish-topic datalib/dag-config-by-hand
+#
+# Copies each topic (without your local annotations.json) and the app's
+# current source from $LFS_APP (default ~/on/learn-from-scratch) into this
+# repo, commits, and pushes. Then press "Update and reload" on the app's page
+# in the Cloud in a Bottle dashboard. --no-push stops after the commit.
+set -eu
+APP="${LFS_APP:-$HOME/on/learn-from-scratch}"
+LIB="$(cd "$(dirname "$0")/.." && pwd)"
+push=1
+[ "${1:-}" = "--no-push" ] && { push=0; shift; }
+[ $# -gt 0 ] || { echo "usage: publish-topic [--no-push] <topic>…" >&2; exit 2; }
+
+# The app's source as it is in $APP's working tree: every tracked file but the
+# content, its .gitignore and README, which this repo keeps its own of.
+(cd "$APP" && git ls-files | grep -v -e '^content/' -e '^\.gitignore$' -e '^README\.md$') \
+  | rsync -a --files-from=- "$APP/" "$LIB/"
+
+names=""
+for t in "$@"; do
+  t="${t#content/}"; t="${t%/}"
+  src="$APP/content/$t"
+  [ -f "$src/manifest.json" ] || { echo "no topic at $src (no manifest.json)" >&2; exit 1; }
+  mkdir -p "$LIB/content/$t"
+  rsync -a --delete --exclude annotations.json "$src/" "$LIB/content/$t/"
+  names="$names $t"
+done
+
+cd "$LIB"
+git add -A
+if git diff --cached --quiet; then
+  echo "nothing changed:$names"
+  exit 0
+fi
+git commit -q -m "Publish$names"
+echo "committed: Publish$names"
+if [ "$push" = 1 ]; then
+  git push -q
+  echo "pushed. Now press \"Update and reload\" on the learn app's page in the dashboard."
+fi

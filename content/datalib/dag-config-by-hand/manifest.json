@@ -1,0 +1,276 @@
+{
+  "title": "Writing a datalib-dag Config by Hand",
+  "subtitle": "A pipeline of your own programs, from an empty data root to a checked config",
+  "dateCreated": "2026-11-19",
+  "tags": [
+    "unread",
+    "datalib"
+  ],
+  "levels": [
+    {
+      "caption": "What the runner does"
+    },
+    {
+      "caption": "The data root"
+    },
+    {
+      "caption": "The smallest step"
+    },
+    {
+      "caption": "Checking the config"
+    },
+    {
+      "caption": "Running it"
+    },
+    {
+      "caption": "What a step receives"
+    },
+    {
+      "caption": "Custom step 1: copy-folder"
+    },
+    {
+      "caption": "Params"
+    },
+    {
+      "caption": "Inputs: the edges"
+    },
+    {
+      "caption": "Custom step 2: word-count"
+    },
+    {
+      "caption": "When a step runs again"
+    },
+    {
+      "caption": "Versions: the outcome line"
+    },
+    {
+      "caption": "Groups"
+    },
+    {
+      "caption": "Reading many steps by pattern"
+    },
+    {
+      "caption": "Locks"
+    },
+    {
+      "caption": "Files or pinned reads"
+    },
+    {
+      "caption": "Progress and logs"
+    },
+    {
+      "caption": "Failure kinds"
+    },
+    {
+      "caption": "Environment"
+    },
+    {
+      "caption": "Verbs and reset"
+    },
+    {
+      "caption": "Prepare at each start"
+    },
+    {
+      "caption": "Stopping cleanly"
+    },
+    {
+      "caption": "The whole config, part 1"
+    },
+    {
+      "caption": "The whole config, part 2"
+    }
+  ],
+  "sections": [
+    {
+      "id": "runner",
+      "title": "What the runner does",
+      "level": 1,
+      "file": "sections/runner.md"
+    },
+    {
+      "id": "data-root",
+      "title": "The data root",
+      "level": 2,
+      "file": "sections/data-root.md"
+    },
+    {
+      "id": "smallest-step",
+      "title": "The smallest step",
+      "level": 3,
+      "file": "sections/smallest-step.md"
+    },
+    {
+      "id": "check-run",
+      "title": "Checking the config",
+      "level": 4,
+      "file": "sections/check-run.md"
+    },
+    {
+      "id": "run",
+      "title": "Running it, before the program exists",
+      "level": 5,
+      "file": "sections/run.md"
+    },
+    {
+      "id": "receives",
+      "title": "What a step receives",
+      "level": 6,
+      "file": "sections/receives.md"
+    },
+    {
+      "id": "copy-folder",
+      "title": "Custom step 1: copy-folder",
+      "level": 7,
+      "file": "sections/copy-folder.md"
+    },
+    {
+      "id": "params",
+      "title": "Params",
+      "level": 8,
+      "file": "sections/params.md"
+    },
+    {
+      "id": "inputs",
+      "title": "Inputs: the edges of the graph",
+      "level": 9,
+      "file": "sections/inputs.md"
+    },
+    {
+      "id": "word-count",
+      "title": "Custom step 2: word-count",
+      "level": 10,
+      "file": "sections/word-count.md"
+    },
+    {
+      "id": "staleness",
+      "title": "When a step runs again",
+      "level": 11,
+      "file": "sections/staleness.md"
+    },
+    {
+      "id": "outcome",
+      "title": "Versions: the outcome line",
+      "level": 12,
+      "file": "sections/outcome.md"
+    },
+    {
+      "id": "groups",
+      "title": "Groups",
+      "level": 13,
+      "file": "sections/groups.md"
+    },
+    {
+      "id": "patterns",
+      "title": "Reading many steps by pattern",
+      "level": 14,
+      "file": "sections/patterns.md"
+    },
+    {
+      "id": "locks",
+      "title": "Locks",
+      "level": 15,
+      "file": "sections/locks.md"
+    },
+    {
+      "id": "reads",
+      "title": "Files or pinned reads",
+      "level": 16,
+      "file": "sections/reads.md",
+      "additionalReading": true
+    },
+    {
+      "id": "progress",
+      "title": "Progress and logs",
+      "level": 17,
+      "file": "sections/progress.md"
+    },
+    {
+      "id": "failures",
+      "title": "Failure kinds",
+      "level": 18,
+      "file": "sections/failures.md"
+    },
+    {
+      "id": "environment",
+      "title": "Environment",
+      "level": 19,
+      "file": "sections/environment.md"
+    },
+    {
+      "id": "verbs",
+      "title": "Verbs and reset",
+      "level": 20,
+      "file": "sections/verbs.md"
+    },
+    {
+      "id": "prepare",
+      "title": "Prepare at each start",
+      "level": 21,
+      "file": "sections/prepare.md",
+      "additionalReading": true
+    },
+    {
+      "id": "cancel",
+      "title": "Stopping cleanly",
+      "level": 22,
+      "file": "sections/cancel.md",
+      "additionalReading": true
+    },
+    {
+      "id": "whole-1",
+      "title": "The whole config, part 1",
+      "level": 23,
+      "file": "sections/whole-1.md"
+    },
+    {
+      "id": "whole-2",
+      "title": "The whole config, part 2",
+      "level": 24,
+      "file": "sections/whole-2.md"
+    }
+  ],
+  "sources": [
+    {
+      "id": "protocol",
+      "title": "Writing a step command (docs/dev/step_protocol.md)",
+      "publisher": "imbue-ai/datalib",
+      "url": "https://github.com/imbue-ai/datalib/blob/main/docs/dev/step_protocol.md"
+    },
+    {
+      "id": "readme",
+      "title": "The runner's README (datalib/backend/dag/README.md)",
+      "publisher": "imbue-ai/datalib",
+      "url": "https://github.com/imbue-ai/datalib/blob/main/datalib/backend/dag/README.md"
+    },
+    {
+      "id": "configmodel",
+      "title": "What a config is made of (docs/dev/config_model.md)",
+      "publisher": "imbue-ai/datalib",
+      "url": "https://github.com/imbue-ai/datalib/blob/main/docs/dev/config_model.md"
+    },
+    {
+      "id": "example",
+      "title": "A complete, commented config (configs/dag_example.toml)",
+      "publisher": "imbue-ai/datalib",
+      "url": "https://github.com/imbue-ai/datalib/blob/main/configs/dag_example.toml"
+    },
+    {
+      "id": "cli",
+      "title": "datalib-dag's command line (datalib/backend/dag/src/cli.rs)",
+      "publisher": "imbue-ai/datalib",
+      "url": "https://github.com/imbue-ai/datalib/blob/main/datalib/backend/dag/src/cli.rs"
+    },
+    {
+      "id": "starter",
+      "title": "The config datalib-dag init writes (datalib/backend/dag/src/starter.rs)",
+      "publisher": "imbue-ai/datalib",
+      "url": "https://github.com/imbue-ai/datalib/blob/main/datalib/backend/dag/src/starter.rs"
+    },
+    {
+      "id": "pr",
+      "title": "datalib-dag knows no program by name: the step protocol, formalized (#1894)",
+      "publisher": "imbue-ai/datalib",
+      "url": "https://github.com/imbue-ai/datalib/pull/1894"
+    }
+  ]
+}
