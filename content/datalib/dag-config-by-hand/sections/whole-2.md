@@ -20,7 +20,7 @@ command = "merge-counts"
 inputs = ["*/count"]
 ```
 
-`datalib-dag --check` exits 0 on this config, and reports what the pattern stood for: [[cite:cli]]
+`datalib-pipeline check` exits 0 on this config, and reports what the pattern stood for: [[cite:cli]]
 
 ```text
   report/all reads */count = commands/count, formats/count

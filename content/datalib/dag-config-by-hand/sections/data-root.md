@@ -1,10 +1,12 @@
 A **data root** is the directory that holds the config and every step's output. [[cite:protocol]]
 
-`datalib-dag init` creates one, with a `config.toml` that has comments and no steps: [[cite:starter]] [[cite:cli]]
+`datalib-pipeline init` creates one, with a `config.toml` that has comments and no steps: [[cite:starter]] [[cite:cli]]
 
 ```sh
-datalib-dag init ~/dag-tutorial
+datalib-pipeline init ~/dag-tutorial
 ```
+
+Every other `datalib-pipeline` command names the data root the same way, as a directory or as the `config.toml` inside it. [[cite:cli]]
 
 After the tutorial's pipeline has run, the root looks like this:
 

@@ -1,5 +1,5 @@
 {
-  "title": "Writing a datalib-dag Config by Hand",
+  "title": "Writing a datalib-pipeline Config by Hand",
   "subtitle": "A pipeline of your own programs, from an empty data root to a checked config",
   "dateCreated": "2026-11-19",
   "tags": [
@@ -256,13 +256,13 @@
     },
     {
       "id": "cli",
-      "title": "datalib-dag's command line (datalib/backend/dag/src/cli.rs)",
+      "title": "datalib-pipeline's command line (datalib/backend/dag/src/cli.rs)",
       "publisher": "imbue-ai/datalib",
       "url": "https://github.com/imbue-ai/datalib/blob/main/datalib/backend/dag/src/cli.rs"
     },
     {
       "id": "starter",
-      "title": "The config datalib-dag init writes (datalib/backend/dag/src/starter.rs)",
+      "title": "The config datalib-pipeline init writes (datalib/backend/dag/src/starter.rs)",
       "publisher": "imbue-ai/datalib",
       "url": "https://github.com/imbue-ai/datalib/blob/main/datalib/backend/dag/src/starter.rs"
     },

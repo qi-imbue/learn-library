@@ -1,4 +1,4 @@
-`datalib-dag` runs a pipeline of commands. Each command is a **step**: one program that writes one directory of its own. [[cite:readme]]
+`datalib-pipeline` runs a pipeline of commands. Each command is a **step**: one program that writes one directory of its own. [[cite:readme]]
 
 A step names the steps it reads. Those names are the edges of a graph, which the runner follows.
 
